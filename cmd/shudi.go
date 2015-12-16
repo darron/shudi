@@ -34,3 +34,9 @@ func GetTime() int {
 	Log(fmt.Sprintf("randSplay='%d' totalTime='%d'", randSplay, totalTime), "info")
 	return totalTime
 }
+
+// Sleep for this many seconds.
+func Sleep(seconds int) {
+	Log(fmt.Sprintf("sleep='%d'", seconds), "debug")
+	time.Sleep(time.Duration(seconds) * time.Second)
+}

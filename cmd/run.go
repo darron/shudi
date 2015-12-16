@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"github.com/spf13/cobra"
 	"os"
-	"time"
 )
 
 var runCmd = &cobra.Command{
@@ -19,8 +18,11 @@ var runCmd = &cobra.Command{
 
 func startRun(cmd *cobra.Command, args []string) {
 	waitTime := GetTime()
-	time.Sleep(time.Duration(waitTime) * time.Second)
-	RunCommand(Exec)
+	Sleep(waitTime)
+	for {
+		RunCommand(Exec)
+		Sleep(Delay)
+	}
 }
 
 func checkRunFlags() {
