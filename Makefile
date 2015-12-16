@@ -29,3 +29,6 @@ gziplinux:
 	mv bin/shudi.gz bin/shudi-$(SHUDI_VERSION)-linux-amd64.gz
 
 release: clean build gziposx clean linux gziplinux clean
+
+consul:
+	consul agent -data-dir `mktemp -d` -bootstrap -server -bind=127.0.0.1
