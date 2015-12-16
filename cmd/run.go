@@ -1,7 +1,10 @@
 package cmd
 
 import (
+	"fmt"
 	"github.com/spf13/cobra"
+	"os"
+	"time"
 )
 
 var runCmd = &cobra.Command{
@@ -15,11 +18,17 @@ var runCmd = &cobra.Command{
 }
 
 func startRun(cmd *cobra.Command, args []string) {
+	waitTime := GetTime()
+	time.Sleep(time.Duration(waitTime) * time.Second)
+	RunCommand(Exec)
 }
 
 func checkRunFlags() {
 	Log("run: Checking cli flags.", "debug")
-
+	if Exec == "" {
+		fmt.Println("Need a command to exec with '-e'")
+		os.Exit(0)
+	}
 	Log("run: Required cli flags present.", "debug")
 }
 
