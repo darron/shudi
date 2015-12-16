@@ -6,6 +6,7 @@ import (
 	"math/rand"
 	"os/exec"
 	"strings"
+	"time"
 )
 
 // RunCommand actually runs the command.
@@ -27,7 +28,8 @@ func RunCommand(command string) bool {
 
 // GetTime the total amount of time to wait - including the random Splay.
 func GetTime() int {
-	randSplay := rand.Intn(Splay)
+	r := rand.New(rand.NewSource(time.Now().UnixNano()))
+	randSplay := r.Intn(Splay)
 	totalTime := Delay - randSplay
 	Log(fmt.Sprintf("randSplay='%d' totalTime='%d'", randSplay, totalTime), "info")
 	return totalTime
