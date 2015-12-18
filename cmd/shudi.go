@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"bytes"
+	"crypto/sha256"
 	"fmt"
 	"math/rand"
 	"os/exec"
@@ -15,7 +16,7 @@ func RunCommand(command string) bool {
 	cli := parts[0]
 	args := parts[1:len(parts)]
 	cmd := exec.Command(cli, args...)
-	Log(fmt.Sprintf("exec='runCommand' cli='%s' args='%s'", cli, args), "debug")
+	Log(fmt.Sprintf("runCommand='true' skip='false' exec='%s' args='%s'", cli, args), "debug")
 	var out bytes.Buffer
 	cmd.Stdout = &out
 	err := cmd.Run()
@@ -39,4 +40,21 @@ func GetTime() int {
 func Sleep(seconds int) {
 	Log(fmt.Sprintf("sleep='%d'", seconds), "debug")
 	time.Sleep(time.Duration(seconds) * time.Second)
+}
+
+// CheckForBlock looks at the backend store to see if execution is blocked.
+func CheckForBlock() bool {
+	fullPath := BuildPath()
+	shudi, _ := CheckStore(fullPath)
+	return shudi
+}
+
+// BuildPath creates the path to look at in the backend store.
+func BuildPath() string {
+	hostname := GetHostname()
+	execSHA := sha256.Sum256([]byte(Exec))
+	execSHAs := fmt.Sprintf("%x", execSHA)
+	path := fmt.Sprintf("%s/%s/%s", strings.TrimPrefix(Prefix, "/"), execSHAs, hostname)
+	Log(fmt.Sprintf("path='%s'", path), "debug")
+	return path
 }

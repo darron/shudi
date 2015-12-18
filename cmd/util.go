@@ -31,3 +31,9 @@ func ReturnCurrentUTC() string {
 	dateUpdated := (t.Format(time.RFC3339))
 	return dateUpdated
 }
+
+// GetHostname returns the hostname.
+func GetHostname() string {
+	hostname, _ := os.Hostname()
+	return hostname
+}

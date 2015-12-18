@@ -23,8 +23,14 @@ var (
 	// Exec is the command that should be executed if there's no block.
 	Exec string
 
-	// Prefix is the location in Consul's KV store to keep state information.
+	// Backend is where the saved state is stored.
+	Backend string
+
+	// Prefix is the location in the KV store to keep state information.
 	Prefix string
+
+	// Connection is how to connect to the KV store.
+	Connection string
 
 	// Splay is the maximum amount of time we should deduct
 	// from Delay for the first execution of Exec.
@@ -41,7 +47,9 @@ func init() {
 	RootCmd.PersistentFlags().IntVarP(&Delay, "delay", "d", 60, "maximum amount of time to delay execution")
 	RootCmd.PersistentFlags().IntVarP(&Splay, "splay", "s", 30, "maximum amount of time to splay execution")
 	RootCmd.PersistentFlags().StringVarP(&Exec, "exec", "e", "", "Execute this command if there's no block.")
-	RootCmd.PersistentFlags().StringVarP(&Prefix, "prefix", "p", "shudi", "Consul prefix for saved state.")
+	RootCmd.PersistentFlags().StringVarP(&Backend, "backend", "b", "consul", "Backend for saved state.")
+	RootCmd.PersistentFlags().StringVarP(&Prefix, "prefix", "p", "shudi", "Prefix for saved state.")
+	RootCmd.PersistentFlags().StringVarP(&Connection, "connection", "c", "127.0.0.1:8500", "Connection string for saved state.")
 	RootCmd.PersistentFlags().StringVarP(&Token, "token", "t", "anonymous", "Token for Consul access")
 	RootCmd.PersistentFlags().BoolVarP(&Verbose, "verbose", "", false, "log output to stdout")
 }

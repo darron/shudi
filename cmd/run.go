@@ -20,7 +20,11 @@ func startRun(cmd *cobra.Command, args []string) {
 	waitTime := GetTime()
 	Sleep(waitTime)
 	for {
-		RunCommand(Exec)
+		if CheckForBlock() {
+			RunCommand(Exec)
+		} else {
+			Log(fmt.Sprintf("skip='true' noexec='%s'", Exec), "info")
+		}
 		Sleep(Delay)
 	}
 }
