@@ -12,5 +12,16 @@ func CheckStore(path string) (bool, error) {
 		value := ConsulGet(c, path)
 		return value, nil
 	}
-	return false, fmt.Errorf("backend='%s' error='true'", Backend)
+	return false, fmt.Errorf("CheckStore backend='%s' error='true'", Backend)
+}
+
+// BlockHost sets a block in the backend.
+func BlockHost(path string) (bool, error) {
+	switch Backend {
+	case "consul":
+		c, _ := ConsulConnect()
+		value := ConsulSet(c, path, Reason)
+		return value, nil
+	}
+	return false, fmt.Errorf("BlockHost backend='%s' error='true'", Backend)
 }

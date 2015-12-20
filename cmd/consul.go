@@ -45,3 +45,20 @@ func cleanupToken(token string) string {
 	firstString := fmt.Sprintf("%s", first[0])
 	return firstString
 }
+
+// ConsulSet a value in a key in the Consul KV store.
+func ConsulSet(c *consul.Client, key string, value string) bool {
+	if value == "" {
+		value = "No reason given."
+	}
+	key = strings.TrimPrefix(key, "/")
+	p := &consul.KVPair{Key: key, Value: []byte(value)}
+	kv := c.KV()
+	_, err := kv.Put(p, nil)
+	if err != nil {
+		Log(fmt.Sprintf("action='ConsulSet' panic='true' key='%s'", key), "info")
+		return false
+	}
+	Log(fmt.Sprintf("action='ConsulSet' key='%s'", key), "debug")
+	return true
+}

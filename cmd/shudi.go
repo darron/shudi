@@ -42,6 +42,16 @@ func Sleep(seconds int) {
 	time.Sleep(time.Duration(seconds) * time.Second)
 }
 
+// BlockCommand puts a block in the KV store.
+func BlockCommand() bool {
+	fullPath := BuildPath()
+	status, _ := BlockHost(fullPath)
+	if status {
+		return true
+	}
+	return false
+}
+
 // CheckForBlock looks at the backend store to see if execution is blocked.
 func CheckForBlock() bool {
 	fullPath := BuildPath()
