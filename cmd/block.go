@@ -19,9 +19,9 @@ var blockCmd = &cobra.Command{
 func startBlock(cmd *cobra.Command, args []string) {
 	status := BlockCommand()
 	if status {
-		fmt.Printf("'%s' was blocked.", Exec)
+		Log(fmt.Sprintf("'%s' was blocked.", Exec), "info")
 	} else {
-		fmt.Printf("'%s' was NOT blocked - something went wrong.", Exec)
+		Log(fmt.Sprintf("'%s' was NOT blocked - something went wrong.", Exec), "info")
 	}
 }
 
