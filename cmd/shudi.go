@@ -42,7 +42,7 @@ func Sleep(seconds int) {
 	time.Sleep(time.Duration(seconds) * time.Second)
 }
 
-// BlockCommand puts a block in the KV store.
+// UnblockCommand removes a block from the KV store.
 func UnblockCommand() bool {
 	fullPath := BuildPath()
 	status, _ := UnblockHost(fullPath)
