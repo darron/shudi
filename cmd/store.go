@@ -25,3 +25,14 @@ func BlockHost(path string) (bool, error) {
 	}
 	return false, fmt.Errorf("BlockHost backend='%s' error='true'", Backend)
 }
+
+// UnblockHost removes a block in the backend.
+func UnblockHost(path string) (bool, error) {
+	switch Backend {
+	case "consul":
+		c, _ := ConsulConnect()
+		value := ConsulDel(c, path)
+		return value, nil
+	}
+	return false, fmt.Errorf("UnblockHost backend='%s' error='true'", Backend)
+}

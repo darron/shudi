@@ -33,4 +33,4 @@ TODO:
 - [x] Add the ability to check Consul's KV store for a key.
 - [x] Add the ability to block this node from running a specific program through `shudi`.
 - [ ] Add metrics around operation.
-- [ ] Add `block` and `unblock` commands.
+- [x] Add `block` and `unblock` commands.

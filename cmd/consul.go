@@ -62,3 +62,16 @@ func ConsulSet(c *consul.Client, key string, value string) bool {
 	Log(fmt.Sprintf("action='ConsulSet' key='%s'", key), "debug")
 	return true
 }
+
+// ConsulDel a key in the Consul KV store.
+func ConsulDel(c *consul.Client, key string) bool {
+	kv := c.KV()
+	key = strings.TrimPrefix(key, "/")
+	_, err := kv.Delete(key, nil)
+	if err != nil {
+		Log(fmt.Sprintf("action='ConsulDel' panic='true' key='%s'", key), "info")
+		return false
+	}
+	Log(fmt.Sprintf("action='ConsulDel' panic='false' key='%s'", key), "info")
+	return true
+}

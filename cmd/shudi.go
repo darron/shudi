@@ -43,6 +43,16 @@ func Sleep(seconds int) {
 }
 
 // BlockCommand puts a block in the KV store.
+func UnblockCommand() bool {
+	fullPath := BuildPath()
+	status, _ := UnblockHost(fullPath)
+	if status {
+		return true
+	}
+	return false
+}
+
+// BlockCommand puts a block in the KV store.
 func BlockCommand() bool {
 	fullPath := BuildPath()
 	status, _ := BlockHost(fullPath)
