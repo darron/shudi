@@ -32,7 +32,7 @@ func main() {
 	args := os.Args[1:]
 	for _, arg := range args {
 		if arg == "-v" || arg == "--version" {
-			fmt.Printf("Version: %s\nRevision: %s\nDate: %s\nGo: %s\n", Version, GitCommit, CompileDate, GoVersion)
+			fmt.Printf("Version  : %s\nRevision : %s\nDate     : %s\nGo       : %s\n", Version, GitCommit, CompileDate, GoVersion)
 			os.Exit(0)
 		}
 	}
