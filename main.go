@@ -21,6 +21,9 @@ var GitCommit = "No revision provided."
 // with build flags. Take a look at the Makefile for information.
 var Version = "No version provided."
 
+// GoVersion details the version of Go this was compiled with.
+var GoVersion = runtime.Version()
+
 func main() {
 	logwriter, e := syslog.New(syslog.LOG_NOTICE, "shudi")
 	if e == nil {
@@ -29,7 +32,7 @@ func main() {
 	args := os.Args[1:]
 	for _, arg := range args {
 		if arg == "-v" || arg == "--version" {
-			fmt.Printf("Version: %s\nRevision: %s\nDate: %s\n", Version, GitCommit, CompileDate)
+			fmt.Printf("Version: %s\nRevision: %s\nDate: %s\nGo: %s\n", Version, GitCommit, CompileDate, GoVersion)
 			os.Exit(0)
 		}
 	}
