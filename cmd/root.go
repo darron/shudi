@@ -41,6 +41,9 @@ var (
 
 	// Verbose logs all output to stdout.
 	Verbose bool
+
+	// Once only runs once - and doesn't loop.
+	Once bool
 )
 
 func init() {
@@ -51,5 +54,6 @@ func init() {
 	RootCmd.PersistentFlags().StringVarP(&Prefix, "prefix", "p", "shudi", "Prefix for saved state.")
 	RootCmd.PersistentFlags().StringVarP(&Connection, "connection", "c", "127.0.0.1:8500", "Connection string for saved state.")
 	RootCmd.PersistentFlags().StringVarP(&Token, "token", "t", "anonymous", "Token for Consul access")
+	RootCmd.PersistentFlags().BoolVarP(&Once, "once", "o", false, "Don't loop - just run once.")
 	RootCmd.PersistentFlags().BoolVarP(&Verbose, "verbose", "", false, "log output to stdout")
 }
