@@ -22,13 +22,14 @@ func startRun(cmd *cobra.Command, args []string) {
 	for {
 		if CheckForBlock() {
 			RunCommand(Exec)
-			if Once {
-				os.Exit(0)
-			}
 		} else {
 			Log(fmt.Sprintf("skip='true' noexec='%s'", Exec), "info")
 		}
-		Sleep(Delay)
+		if Once {
+			os.Exit(0)
+		} else {
+			Sleep(Delay)
+		}
 	}
 }
 
