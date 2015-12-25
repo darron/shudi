@@ -44,9 +44,13 @@ var (
 
 	// Once only runs once - and doesn't loop.
 	Once bool
+
+	// DogStatsd sends metrics to the local Dogstatsd endpoint.
+	DogStatsd bool
 )
 
 func init() {
+	AutoEnable()
 	RootCmd.PersistentFlags().IntVarP(&Delay, "delay", "d", 60, "maximum amount of time to delay execution")
 	RootCmd.PersistentFlags().IntVarP(&Splay, "splay", "s", 30, "maximum amount of time to splay execution")
 	RootCmd.PersistentFlags().StringVarP(&Exec, "exec", "e", "", "Execute this command if there's no block.")
@@ -56,4 +60,5 @@ func init() {
 	RootCmd.PersistentFlags().StringVarP(&Token, "token", "t", "anonymous", "Token for Consul access")
 	RootCmd.PersistentFlags().BoolVarP(&Once, "once", "o", false, "Don't loop - just run once.")
 	RootCmd.PersistentFlags().BoolVarP(&Verbose, "verbose", "", false, "log output to stdout")
+	RootCmd.PersistentFlags().BoolVarP(&DogStatsd, "dogstatsd", "", false, "Send metrics to Dogstatsd.")
 }

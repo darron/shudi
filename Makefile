@@ -7,6 +7,7 @@ all: build
 
 deps:
 	go get -u github.com/spf13/cobra
+	go get -u github.com/PagerDuty/godspeed
 
 format:
 	gofmt -w .
