@@ -48,9 +48,6 @@ func cleanupToken(token string) string {
 
 // ConsulSet a value in a key in the Consul KV store.
 func ConsulSet(c *consul.Client, key string, value string) bool {
-	if value == "" {
-		value = "No reason given."
-	}
 	key = strings.TrimPrefix(key, "/")
 	p := &consul.KVPair{Key: key, Value: []byte(value)}
 	kv := c.KV()

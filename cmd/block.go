@@ -32,6 +32,9 @@ func checkBlockFlags() {
 		fmt.Println("Need a command to block with '-e'")
 		os.Exit(0)
 	}
+	if Reason == "" {
+		Reason = GenerateReason()
+	}
 	Log("block: Required cli flags present.", "debug")
 }
 
