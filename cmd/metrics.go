@@ -6,25 +6,15 @@ import (
 	"strings"
 )
 
-// StatsdSkip sends metrics to DogStatsd on a skip operation.
-func StatsdSkip() {
+// StatsdSend sends metrics to DogStatsd on many operations.
+func StatsdSend(metricName string) {
 	if DogStatsd {
-		Log(fmt.Sprintf("DogStatsd='true' skip='true' Exec='%s'", Exec), "debug")
+		Log(fmt.Sprintf("DogStatsd='true' %s='true' Exec='%s'", metricName, Exec), "debug")
 		statsd, _ := godspeed.NewDefault()
 		defer statsd.Conn.Close()
 		tags := makeTags()
-		statsd.Incr("shudi.skip", tags)
-	}
-}
-
-// StatsdRun sends metrics to DogStatsd on a run operation.
-func StatsdRun() {
-	if DogStatsd {
-		Log(fmt.Sprintf("DogStatsd='true' skip='false' Exec='%s'", Exec), "debug")
-		statsd, _ := godspeed.NewDefault()
-		defer statsd.Conn.Close()
-		tags := makeTags()
-		statsd.Incr("shudi.run", tags)
+		metric := fmt.Sprintf("shudi.%s", metricName)
+		statsd.Incr(metric, tags)
 	}
 }
 

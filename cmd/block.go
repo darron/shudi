@@ -20,6 +20,7 @@ func startBlock(cmd *cobra.Command, args []string) {
 	status := BlockCommand()
 	if status {
 		Log(fmt.Sprintf("'%s' was blocked.", Exec), "info")
+		StatsdSend("block")
 	} else {
 		Log(fmt.Sprintf("'%s' was NOT blocked - something went wrong.", Exec), "info")
 	}

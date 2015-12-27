@@ -20,6 +20,7 @@ func startUnblock(cmd *cobra.Command, args []string) {
 	status := UnblockCommand()
 	if status {
 		Log(fmt.Sprintf("'%s' was unblocked.", Exec), "info")
+		StatsdSend("unblock")
 	} else {
 		Log(fmt.Sprintf("'%s' was NOT unblocked - something went wrong.", Exec), "info")
 	}
