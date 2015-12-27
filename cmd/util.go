@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"os/user"
 	"time"
 )
 
@@ -30,6 +31,14 @@ func ReturnCurrentUTC() string {
 	t := time.Now().UTC()
 	dateUpdated := (t.Format(time.RFC3339))
 	return dateUpdated
+}
+
+// GetCurrentUsername grabs the current user running the binary.
+func GetCurrentUsername() string {
+	usr, _ := user.Current()
+	username := usr.Username
+	Log(fmt.Sprintf("username='%s'", username), "debug")
+	return username
 }
 
 // GetHostname returns the hostname.

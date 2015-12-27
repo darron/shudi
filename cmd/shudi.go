@@ -6,7 +6,6 @@ import (
 	"fmt"
 	"math/rand"
 	"os/exec"
-	"os/user"
 	"strings"
 	"time"
 )
@@ -80,25 +79,10 @@ func BuildPath() string {
 	return path
 }
 
-// GetCurrentUsername grabs the current user running the binary.
-func GetCurrentUsername() string {
-	usr, _ := user.Current()
-	username := usr.Username
-	Log(fmt.Sprintf("username='%s'", username), "debug")
-	return username
-}
-
-// GetCurrentUTC returns the current UTC time in RFC3339 format.
-func GetCurrentUTC() string {
-	t := time.Now().UTC()
-	dateUpdated := (t.Format(time.RFC3339))
-	return dateUpdated
-}
-
 // GenerateReason returns some basic information to put into the store.
 func GenerateReason() string {
 	username := GetCurrentUsername()
-	date := GetCurrentUTC()
+	date := ReturnCurrentUTC()
 	reason := fmt.Sprintf("No reason given by '%s' at '%s'.", username, date)
 	return reason
 }
