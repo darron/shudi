@@ -27,10 +27,3 @@ I'd like to make the `block` interface simple:
 Also:
 
 `./shudi unblock -e chef-client`
-
-TODO:
-
-- [x] Add the ability to check Consul's KV store for a key.
-- [x] Add the ability to block this node from running a specific program through `shudi`.
-- [x] Add metrics around operation.
-- [x] Add `block` and `unblock` commands.
