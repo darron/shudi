@@ -8,6 +8,7 @@ all: build
 deps:
 	go get -u github.com/spf13/cobra
 	go get -u github.com/PagerDuty/godspeed
+	go get -u github.com/hashicorp/consul/api
 
 format:
 	gofmt -w .
