@@ -11,6 +11,10 @@ func CheckStore(path string) (bool, error) {
 		c, _ := ConsulConnect()
 		value := ConsulGet(c, path)
 		return value, nil
+	case "etcd":
+		e := EtcdConnect()
+		value := EtcdGet(e, path)
+		return value, nil
 	}
 	return false, fmt.Errorf("CheckStore backend='%s' error='true'", Backend)
 }

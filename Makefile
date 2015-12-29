@@ -11,6 +11,8 @@ deps:
 	go get -u github.com/hashicorp/consul/api
 	go get -u github.com/progrium/basht
 	go get -u github.com/CiscoCloud/consul-cli
+	go get -u github.com/coreos/etcd/Godeps/_workspace/src/golang.org/x/net/context
+	go get -u github.com/coreos/etcd/client
 
 format:
 	gofmt -w .
@@ -34,6 +36,12 @@ gziplinux:
 
 release: clean build gziposx clean linux gziplinux clean
 
+etcd:
+	etcd --data-dir `mktemp -d` --force-new-cluster 1>/dev/null &
+
+etcd_kill:
+	ps auxwww | grep "[e]tcd.*tmp.*" | cut -d ' ' -f 3 | xargs kill
+
 consul:
 	consul agent -data-dir `mktemp -d` -bootstrap -server -bind=127.0.0.1 1>/dev/null &
 
@@ -42,5 +50,5 @@ consul_kill:
 
 test: wercker
 
-wercker: consul
+wercker: consul etcd
 	basht test/tests.bash
