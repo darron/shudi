@@ -9,6 +9,8 @@ deps:
 	go get -u github.com/spf13/cobra
 	go get -u github.com/PagerDuty/godspeed
 	go get -u github.com/hashicorp/consul/api
+	go get -u github.com/progrium/basht
+	go get -u github.com/CiscoCloud/consul-cli
 
 format:
 	gofmt -w .
@@ -33,4 +35,12 @@ gziplinux:
 release: clean build gziposx clean linux gziplinux clean
 
 consul:
-	consul agent -data-dir `mktemp -d` -bootstrap -server -bind=127.0.0.1
+	consul agent -data-dir `mktemp -d` -bootstrap -server -bind=127.0.0.1 1>/dev/null &
+
+consul_kill:
+	ps auxwww | grep "[c]onsul agent.*tmp.*bind.127.*" | cut -d ' ' -f 3 | xargs kill
+
+test: wercker
+
+wercker: consul
+	basht test/tests.bash
