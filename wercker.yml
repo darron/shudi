@@ -19,6 +19,8 @@ deploy:
           cd build
           sudo fpm-cook install-deps
           sudo fpm-cook
+          PACKAGECLOUD=$(eval echo "\$PACKAGECLOUD_TOKEN") && echo -e "$PACKAGECLOUD" > ~/.packagecloud && chmod 600 ~/.packagecloud
+          DEB_FILE=$(find . -name '*.deb') && package_cloud push darron/shudi/ubuntu/trusty $DEB_FILE
   after-steps:
     - wantedly/pretty-slack-notify:
         webhook_url: $SLACK_WEBHOOK_URL
