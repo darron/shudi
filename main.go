@@ -1,8 +1,8 @@
 package main
 
 import (
-	"./cmd/"
 	"fmt"
+	"github.com/darron/sifter/cmd"
 	"log"
 	"log/syslog"
 	"os"
