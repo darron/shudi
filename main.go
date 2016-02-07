@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"github.com/darron/sifter/cmd"
+	"github.com/darron/shudi/cmd"
 	"log"
 	"log/syslog"
 	"os"

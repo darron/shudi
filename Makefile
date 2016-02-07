@@ -11,7 +11,7 @@ deps:
 	go get -u github.com/hashicorp/consul/api
 	go get -u github.com/progrium/basht
 	go get -u github.com/CiscoCloud/consul-cli
-	go get -u github.com/darron/sifter
+	go get -u github.com/darron/shudi
 
 format:
 	gofmt -w .
